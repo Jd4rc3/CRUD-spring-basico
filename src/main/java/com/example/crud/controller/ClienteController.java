@@ -1,5 +1,6 @@
 package com.example.crud.controller;
 
+import com.example.crud.controller.util.CustomResponse;
 import com.example.crud.domain.Cliente;
 import com.example.crud.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
+    @Autowired
+    CustomResponse customResponse;
+
     @GetMapping("/all")
     public ResponseEntity<List<Cliente>> getAllClients() {
         var clientes = clienteService.getAllClients();
@@ -25,8 +29,21 @@ public class ClienteController {
     }
 
     @GetMapping("/{nombre}")
-    public ResponseEntity<List<Cliente>> findByNombre(@PathVariable("nombre") String apellido) {
-        var clientes = clienteService.findByNombre(apellido);
-        return new ResponseEntity<>(clientes, HttpStatus.NOT_FOUND);
+    public ResponseEntity<CustomResponse> findByNombre(@PathVariable("nombre") String nombre) {
+        List<Cliente> clientesEncontrados = clienteService.findByNombre(nombre);
+
+        if (clientesEncontrados.isEmpty()) {
+            var message = String.format("No se encontro clientes con el nombre %s", nombre);
+            var respuesta = customResponse.fillFields(true, message, new String[]{},
+                                                      HttpStatus.NOT_FOUND);
+
+            return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND);
+        }
+
+        var message = String.format("Se encontro %d cliente(s) con el nombre %s",
+                                    clientesEncontrados.size(), nombre);
+
+        return ResponseEntity.ok(
+                customResponse.fillFields(false, message, clientesEncontrados, HttpStatus.OK));
     }
 }
