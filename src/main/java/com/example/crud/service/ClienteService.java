@@ -19,4 +19,8 @@ public class ClienteService {
     public List<Cliente> findByNombre(String nombre) {
         return clienteRepository.findByNombre(nombre);
     }
+
+    public Cliente createCliente(Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
 }

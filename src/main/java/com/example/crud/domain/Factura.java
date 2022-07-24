@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,10 +34,8 @@ public class Factura {
     @OneToMany(mappedBy = "factura")
     private List<Detalle> detalles = new ArrayList<>();
 
-    @JoinColumn(name = "cli_id_cliente", nullable = false)
+    @JoinColumn(name = "cli_id_cliente", nullable = false, insertable = false, updatable = false)
     @ManyToOne(targetEntity = Cliente.class)
     @JsonManagedReference(value = "cliente-factura")
     private Cliente cliente;
-
-
 }

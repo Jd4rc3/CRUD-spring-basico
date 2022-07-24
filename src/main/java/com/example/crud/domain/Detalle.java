@@ -32,15 +32,14 @@ public class Detalle {
     @Column(name = "det_descuento", nullable = false)
     private Integer detDescuento;
 
-
     @JsonBackReference(value = "factura-detalle")
-    @JoinColumn(name = "fac_id_factura")
+    @JoinColumn(name = "fac_id_factura", insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Factura factura;
 
 
     @ManyToOne(targetEntity = Producto.class, fetch = FetchType.EAGER)
-    @JsonManagedReference(value = "detalle-producto")
-    @JoinColumn(name = "prod_id_producto")
+        @JsonManagedReference(value = "detalle-producto")
+    @JoinColumn(name = "prod_id_producto", insertable = false, updatable = false)
     private Producto producto;
 }
