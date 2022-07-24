@@ -1,6 +1,7 @@
 package com.example.crud.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Producto {
     private Integer prodValor;
 
     @OneToMany(mappedBy = "producto")
+    @JsonIgnore
     @JsonBackReference(value = "detalle-producto")
     private List<Detalle> detalles = new ArrayList<>();
-
 }
