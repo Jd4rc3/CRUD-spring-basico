@@ -32,9 +32,4 @@ public class Cliente {
 
     @Column(name = "cli_correo", length = 100)
     private String correo;
-
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-    @JsonIgnore
-    @JsonBackReference(value = "cliente-factura")
-    private List<Factura> facturas = new ArrayList<>();
 }

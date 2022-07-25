@@ -13,4 +13,8 @@ public class ProductoService {
     public Producto createProducto(Producto producto) {
         return productoRepository.save(producto);
     }
+
+    public Producto getProducto(Integer producto) {
+        return productoRepository.findById(producto).orElse(null);
+    }
 }
