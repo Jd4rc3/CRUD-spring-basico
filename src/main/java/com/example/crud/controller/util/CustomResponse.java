@@ -15,11 +15,6 @@ public class CustomResponse {
 
     private Object data;
 
-    public CustomResponse() {
-        error = false;
-        message = "";
-        data = null;
-    }
 
     public CustomResponse fillFields(Boolean error, String message, Object data, HttpStatus status) {
         this.error = error;

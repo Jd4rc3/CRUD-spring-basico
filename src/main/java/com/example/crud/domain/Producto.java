@@ -19,8 +19,8 @@ public class Producto {
     private Integer id;
 
     @Column(name = "prod_nombre", nullable = false, length = 100)
-    private String prodNombre;
+    private String nombre;
 
     @Column(name = "prod_valor", nullable = false)
-    private Integer prodValor;
+    private Integer valor;
 }

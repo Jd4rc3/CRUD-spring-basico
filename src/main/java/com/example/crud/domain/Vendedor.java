@@ -19,8 +19,8 @@ public class Vendedor {
     private Integer id;
 
     @Column(name = "ven_nombre", nullable = false, length = 100)
-    private String venNombre;
+    private String nombre;
 
     @Column(name = "ven_correo", nullable = false, length = 100)
-    private String venCorreo;
+    private String correo;
 }
